@@ -16,6 +16,8 @@ def validate_project_name(dest_project:Path) -> None:
         raise FileExistsError(f'Subproject named "{project_name}" already exists')
     if project_name.startswith('run_'):
         raise NameError(f'Invalid project name "{project_name}" - project names cannot start with "run_"')
+    if '-' in project_name:
+        raise ValueError(f'Invalid character "-" in project_name {project_name}')
 
 def main():
     if len(sys.argv) != 2:
@@ -23,7 +25,6 @@ def main():
         sys.exit(1)
     
     project_name = sys.argv[1]
-    package_name = project_name.replace('-','_').lower()
 
     if not TEMPLATE_SUBDIR.exists():
         raise FileNotFoundError(f'Template package not found at {TEMPLATE_SUBDIR}')
@@ -35,7 +36,7 @@ def main():
     for path in dest_project.rglob('*'):
         if path.is_file() and path.suffix in TEXT_EXTENSIONS:
             text = path.read_text(encoding='utf-8')
-            text = text.replace(PLACEHOLDER,package_name)
+            text = text.replace(PLACEHOLDER,project_name)
             path.write_text(text,encoding='utf-8')
 
     for root,dirs,files in os.walk(dest_project):
