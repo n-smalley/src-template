@@ -27,8 +27,9 @@ def _create_core_folder(dest_project:Path) -> None:
     dest_dir.mkdir(parents=True,exist_ok=True)
 
     copy_files = {
-        TEMPLATE_SUBDIR / 'paths.py':dest_dir / 'paths.py',
-        TEMPLATE_SUBDIR / 'config.py':dest_dir / 'config.py',
+        TEMPLATE_SUBDIR / 'paths.py': dest_dir / 'paths.py',
+        TEMPLATE_SUBDIR / 'config.py': dest_dir / 'config.py',
+        TEMPLATE_SUBDIR / '__init__.py': dest_dir / '__init__.py'
     }
     for src,dest in copy_files.items():
         shutil.copy(src,dest)
