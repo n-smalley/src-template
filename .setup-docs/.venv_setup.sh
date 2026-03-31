@@ -45,4 +45,5 @@ fi
 
 echo ""
 echo "Setup complete."
-echo "Python in use
+echo "Python in use:"
+"$VENV_PYTHON" --version
