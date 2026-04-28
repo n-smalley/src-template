@@ -1,5 +1,4 @@
 @echo off
-setlocal
 
 REM Directory where this script lives (.setup_files)
 set SCRIPT_DIR=%~dp0
@@ -45,4 +44,3 @@ echo Setup complete.
 echo Python in use:
 "%VENV_PYTHON%" --version
 
-endlocal
